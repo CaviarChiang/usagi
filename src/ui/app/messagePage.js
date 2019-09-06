@@ -33,11 +33,11 @@ class MessagePage extends React.Component{
 			{message: 'message2', received: false},
 			{message: 'message3', received: true},
 			{message: 'message4', received: true},
-			{message: 'message5', received: false},
+			{randomObject: 'test default'},
 		];
 		return <div>
 			{list.map((item) => <MessageBubble 
-				text={item.message}
+				message={item.message}
 				received={item.received}
 			/>)}
 			<TextField/>
