@@ -1,0 +1,11 @@
+.bubble .MuiPaper-root {
+	color: black;
+	background-color: lightcoral;
+	text-align: left
+}
+
+.bubble.received .MuiPaper-root {
+	color:black;
+	background-color: lightblue;
+	text-align: right
+}
