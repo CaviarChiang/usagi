@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 import MessageBubble from '../components/messageBubble.js';
+import MessageInputBar from '../components/messageInputBar.js';
+import MessageTopBar from '../components/messageTopBar.js';
 
 //these are here just to annotate the properties that can be passed down
 const propTypes = {
@@ -25,9 +28,6 @@ const defaultProps = {
 class MessagePage extends React.Component{
 	constructor(props){
 		super(props);
-	}
-
-	render() {
 		let list = [
 			{message: 'message1', received: true},
 			{message: 'message2', received: false},
@@ -35,12 +35,20 @@ class MessagePage extends React.Component{
 			{message: 'message4', received: true},
 			{randomObject: 'test default'},
 		];
+		this.state = {
+			messageList: list,
+		}
+	}
+
+	render() {
+		
 		return <div>
-			{list.map((item) => <MessageBubble 
+			<MessageTopBar title='Name of person' subTitle='some sub text'/>
+			{this.state.messageList.map((item) => <MessageBubble 
 				message={item.message}
 				received={item.received}
 			/>)}
-			<TextField/>
+			<MessageInputBar/>
 		</div>
 	}
 }

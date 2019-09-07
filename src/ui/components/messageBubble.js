@@ -15,7 +15,7 @@ const defaultProps = {
 class ChatBubble extends React.Component{
 	render() {
 		let received = this.props.received;
-		let className = received? 'bubble received' : 'bubble';
+		let className = received? 'Bubble Received' : 'Bubble';
 		return <div className={className}>
 			<Card>
 				{this.props.message}

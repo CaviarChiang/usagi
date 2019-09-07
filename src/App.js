@@ -9,7 +9,7 @@ import './style/messagePage.css';
 function App() {
   return (
 	<div className='App'>
-	  	<Grid container alignContent='stretch' alignItems='stretch' spacing={1} >
+	  	<Grid container alignContent='stretch' alignItems='stretch'>
 			<Grid item sm={3}>
 				<ChatListPage input="test input"/>
 			</Grid>

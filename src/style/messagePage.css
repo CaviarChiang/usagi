@@ -1,11 +1,26 @@
-.bubble .MuiPaper-root {
+.Bubble .MuiPaper-root {
 	color: black;
 	background-color: lightcoral;
 	text-align: right
 }
 
-.bubble.received .MuiPaper-root {
+.Bubble.Received .MuiPaper-root {
 	color:black;
 	background-color: lightblue;
 	text-align: left
+}
+
+.MessageTopBar .MuiToolbar-root{
+	background-color: grey
+}
+
+
+.MessageInputBar .MuiAppBar-root{
+	position: fixed;
+	background-color: white;
+	bottom: 0;
+}
+
+.MessageInputBar .MuiTextField-root{
+	width: 100%;
 }
