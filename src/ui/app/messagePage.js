@@ -1,26 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 
-import MessageBubble from '../components/messageBubble.js';
-import MessageInputBar from '../components/messageInputBar.js';
-import MessageTopBar from '../components/messageTopBar.js';
+import MessageBubble from '../components/messagePage/messageBubble.js';
+import MessageInputBar from '../components/messagePage/messageInputBar.js';
+import MessageTopBar from '../components/messagePage/messageTopBar.js';
 
-//these are here just to annotate the properties that can be passed down
 const propTypes = {
 	name: PropTypes.string,
-	prompt: PropTypes.oneOf([
-		'success',
-		'warning',
-		'error',
-		'wrench',
-		'offline',
-		'info',
-	]),
 };
 
-//automatically sets these as defualt if none was passed down
 const defaultProps = {
 	name: 'default name',
 };
@@ -28,6 +16,7 @@ const defaultProps = {
 class MessagePage extends React.Component{
 	constructor(props){
 		super(props);
+		this.onSubmit = this.onSubmit.bind(this);
 		let list = [
 			{message: 'message1', received: true},
 			{message: 'message2', received: false},
@@ -40,18 +29,29 @@ class MessagePage extends React.Component{
 		}
 	}
 
+	onSubmit(e){
+		if(e.keyCode == 13){
+			let newMessage = {
+				message: e.target.value
+			}
+			this.setState({
+				messageList: [...this.state.messageList, newMessage]
+			})
+		}
+	}
+
 	render() {
-		
 		return <div>
 			<MessageTopBar title='Name of person' subTitle='some sub text'/>
-			{this.state.messageList.map((item) => <MessageBubble 
+			{this.state.messageList.map((item) => <MessageBubble
 				message={item.message}
 				received={item.received}
 			/>)}
-			<MessageInputBar/>
+			<MessageInputBar onKeyDown={this.onSubmit}/>
 		</div>
 	}
 }
+
 MessagePage.propTypes = propTypes;
 MessagePage.defaultProps = defaultProps;
 export default MessagePage;
