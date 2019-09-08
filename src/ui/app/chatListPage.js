@@ -75,16 +75,16 @@ class ChatListPage extends React.Component {
 					</div>
 
 					<Snackbar
-					anchorOrigin={{
-						vertical: 'bottom',
-						horizontal: 'left',
-					}}
-					autoHideDuration={1000}
-					open={false}
-					ContentProps={{
-						'aria-describedby': 'message-id',
-					}}
-					message={<span id="message-id">{chat.user.name} online</span>}
+						anchorOrigin={{
+							vertical: 'bottom',
+							horizontal: 'left',
+						}}
+						autoHideDuration={1000}
+						open={false}
+						ContentProps={{
+							'aria-describedby': 'message-id',
+						}}
+						message={<span id="message-id">{chat.user.name} online</span>}
 					/>
 				</ListItem>
 			))}
