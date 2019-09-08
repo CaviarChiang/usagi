@@ -18,8 +18,8 @@ class Orchestrator{
         this.AppData.setTargetId(targetId);
     }
 
-    loadChats(userId, onSuccess, onFail) {
-        this.ApiUtil.loadChats(userId).then((response) => {
+    loadChats(onSuccess, onFail) {
+        this.ApiUtil.loadChats(this.AppData.userId).then((response) => {
             console.log(response);
             if(onSuccess){
                 onSuccess();

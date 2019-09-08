@@ -8,7 +8,6 @@ import MessageInputBar from '../components/messagePage/messageInputBar.js';
 import MessageTopBar from '../components/messagePage/messageTopBar.js';
 
 const propTypes = {
-	targetId: PropTypes.string,
 };
 
 const defaultProps = {
