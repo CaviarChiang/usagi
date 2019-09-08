@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem/ListItem';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import UserPhoto from '../components/common/userPhoto';
+import Orchestrator from '../../orchestrator';
 
 const kyabia = {
 	"id": 11198,
@@ -19,7 +20,7 @@ const kyle = {
 	"name": "Zyle Khou",
 }
 
-const chats = [
+const testData = [
 	{
 		id: 7956,
 		user: kyle,
@@ -57,13 +58,31 @@ const propTypes = {
 const defaultProps = {};
 
 class ChatListPage extends React.Component {
+	constructor(props) {
+		super(props);
+		this.onLoadData = this.onLoadData.bind(this);
+		this.state = {
+			chats: testData,
+		}
+	}
+
+	componentDidMount() {
+		Orchestrator.loadChats(this.onLoadData);
+	}
+
+	onLoadData() {
+		this.setState({
+			chats: [...this.state.chats, ...Orchestrator.AppData.chats],
+		});
+	}
+
 	render() {
 		return <div className='kyabia :)'>
 			<p>this is your space {this.props.input}</p>
 			<UserPhoto user={kyabia}></UserPhoto>
 			<UserPhoto user={kyle}></UserPhoto>
 
-			{chats.map((chat, index) => (
+			{this.state.chats.map((chat, index) => (
 				<ListItem button className="user" key={index}>
 					<UserPhoto user={chat.user} />
 					<div className="details">

@@ -3,7 +3,8 @@ class AppData{
         this.userId = '';
         this.userName = '';
         this.targetId = '';
-        this.messageCache = {}
+        this.messageCache = {};
+        this.chats = [];
     }
 
     setUserId(userId) {
