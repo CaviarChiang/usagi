@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Orchestrator from '../../orchestrator';
+
 import MessageBubble from '../components/messagePage/messageBubble.js';
 import MessageInputBar from '../components/messagePage/messageInputBar.js';
 import MessageTopBar from '../components/messagePage/messageTopBar.js';
 
 const propTypes = {
-	name: PropTypes.string,
+	targetId: PropTypes.string,
 };
 
 const defaultProps = {
@@ -17,6 +19,7 @@ class MessagePage extends React.Component{
 	constructor(props){
 		super(props);
 		this.onSubmit = this.onSubmit.bind(this);
+		this.onLoadData = this.onLoadData.bind(this);
 		let list = [
 			{message: 'message1', received: true},
 			{message: 'message2', received: false},
@@ -25,14 +28,28 @@ class MessagePage extends React.Component{
 			{randomObject: 'test default'},
 		];
 		this.state = {
-			messageList: list,
+			messageList: [],
 		}
+	}
+
+	componentDidMount(){
+		Orchestrator.setTargetId('2');
+		Orchestrator.loadHistory(this.onLoadData);
+	}
+
+	onLoadData() {
+		this.setState({
+			messageList: Orchestrator.AppData.messageCache['2']
+		})
 	}
 
 	onSubmit(e){
 		if(e.keyCode == 13){
 			let newMessage = {
-				message: e.target.value
+				fields: {
+					msg_content: e.target.value,
+					sender: Orchestrator.AppData.userId,
+				}
 			}
 			this.setState({
 				messageList: [...this.state.messageList, newMessage]
@@ -44,8 +61,8 @@ class MessagePage extends React.Component{
 		return <div>
 			<MessageTopBar title='Name of person' subTitle='some sub text'/>
 			{this.state.messageList.map((item) => <MessageBubble
-				message={item.message}
-				received={item.received}
+				message={item.fields.msg_content}
+				received={item.fields.sender == Orchestrator.AppData.targetId}
 			/>)}
 			<MessageInputBar onKeyDown={this.onSubmit}/>
 		</div>
