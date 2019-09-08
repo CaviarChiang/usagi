@@ -5,8 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem/ListItem';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import UserPhoto from '../components/common/userPhoto';
-import Orchestrator from '../../orchestrator';
+import UserPhoto from '../components/common/UserPhoto';
+import Orchestrator from '../../Orchestrator';
 
 const kyabia = {
 	"id": 11198,

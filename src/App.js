@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 
-import ChatListPage from './ui/app/chatListPage';
-import MessagePage from './ui/app/messagePage';
+import ChatListPage from './ui/app/ChatListPage';
+import MessagePage from './ui/app/MessagePage';
 
 import './style/messagePage.css';
 

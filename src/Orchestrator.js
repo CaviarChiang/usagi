@@ -1,6 +1,5 @@
-import ApiUtil from './utils/apiUtil.js';
-import JsonUtil from './utils/jsonUtil.js';
-import AppData from './data/appData.js';
+import ApiUtil from './utils/ApiUtil.js';
+import AppData from './data/AppData.js';
 
 const testLastMessage = {
     text: "This is a test message",
@@ -33,7 +32,6 @@ class Orchestrator{
 
     loadChats(onSuccess, onFail) {
         this.ApiUtil.loadChats(this.AppData.userId).then((response) => {
-            // console.log(response);
             this.AppData.chats = response.data.map(user => {
                 return {
                     id: testId,
@@ -66,6 +64,17 @@ class Orchestrator{
                 }
             });
         }
+    }
+
+    sendNewMessage(newMessage, onSuccess){
+        //TODO write to thing
+        this.AppData.messageCache[this.AppData.targetId].push({
+            fields: {
+                msg_content: newMessage,
+			    sender: this.AppData.userId,
+            }
+        });
+        onSuccess();
     }
 }
 

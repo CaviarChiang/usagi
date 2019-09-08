@@ -11,7 +11,10 @@
 }
 
 .MessageTopBar .MuiToolbar-root{
-	background-color: grey
+	background-color: grey;
+	position: fixed;
+	width: 100%;
+	top: 0;
 }
 
 
