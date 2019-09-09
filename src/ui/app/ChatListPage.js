@@ -67,7 +67,7 @@ class ChatListPage extends React.Component {
 	}
 
 	componentDidMount() {
-		Orchestrator.loadChats(this.onLoadData);
+		Orchestrator.APIloadChats(this.onLoadData);
 	}
 
 	onLoadData() {

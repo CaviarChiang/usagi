@@ -20,7 +20,17 @@ class MessageView extends React.Component{
     }
 
     componentDidMount(){
-		Orchestrator.loadHistory(this.onLoadData);
+		Orchestrator.APIloadHistory(this.onLoadData);
+		Orchestrator.getAppData().relaySocket.onmessage = (event) => {
+			let data = JSON.parse(event.data);
+			Orchestrator.getAppData().messageCache[Orchestrator.getAppData().targetId].push({
+				fields: {
+					msg_content: data.message,
+					sender: data.sender_id,
+				}
+			});
+			this.forceUpdate();
+		};
     }
 
     onLoadData() {

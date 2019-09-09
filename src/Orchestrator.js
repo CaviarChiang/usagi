@@ -20,6 +20,7 @@ class Orchestrator{
         this.AppData = new AppData();
         this.AppData.setUserId('1', 'kyabia');
         this.AppData.setTargetId('2');
+        this.relayConnect(this.AppData.userId);
     }
 
     getAppData() {
@@ -30,7 +31,7 @@ class Orchestrator{
         this.AppData.setTargetId(targetId);
     }
 
-    loadChats(onSuccess, onFail) {
+    APIloadChats(onSuccess, onFail) {
         this.ApiUtil.loadChats(this.AppData.userId).then((response) => {
             this.AppData.chats = response.data.map(user => {
                 return {
@@ -51,7 +52,7 @@ class Orchestrator{
         });
     }
     
-    loadHistory(onSuccess, onFail) {
+    APIloadHistory(onSuccess, onFail) {
         let targetId = this.AppData.targetId;
         let userId = this.AppData.userId;
         if(targetId in this.AppData.messageCache){
@@ -66,8 +67,26 @@ class Orchestrator{
         }
     }
 
+    relayConnect(userId){
+        let data = JSON.stringify({
+            user_id: userId 
+        });
+        this.AppData.relaySocket = new WebSocket('ws://mrmyyesterday.com:5000');
+        this.AppData.relaySocket.onopen = () => {
+            this.AppData.relaySocket.send(data);
+        };
+    }
+
     sendNewMessage(newMessage, onSuccess){
         //TODO write to thing
+        if(this.AppData.relaySocket != null){
+            this.AppData.relaySocket.send(
+                JSON.stringify({
+                    receiver_id: this.AppData.targetId,
+                    message: newMessage
+                })
+            )
+        }
         this.AppData.messageCache[this.AppData.targetId].push({
             fields: {
                 msg_content: newMessage,

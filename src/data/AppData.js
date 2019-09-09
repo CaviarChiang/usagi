@@ -5,6 +5,7 @@ class AppData{
 		this.targetId = '';
 		this.messageCache = {};
 		this.chats = [];
+		this.relaySocket = null;
 	}
 
 	setUserId(userId) {
