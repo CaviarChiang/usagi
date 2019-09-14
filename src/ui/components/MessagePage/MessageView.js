@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Orchestrator from '../../../Orchestrator.js';
 import MessageBubble from './MessageBubble.js';
+import ScrollHelper from '../common/ScrollHelper.js';
 
 const propTypes = {
 };
@@ -31,16 +32,8 @@ class MessageView extends React.Component{
 			});
 			this.forceUpdate();
 		};
-		this.scrollToBottom();
-	}
-	
-	scrollToBottom() {
-		this.messagesEnd.scrollIntoView({ behavior: "smooth" });
-	}
-
-	componentDidUpdate() {
-		this.scrollToBottom();
-	}							
+		//this.scrollToBottom();
+	}						
 
     onLoadData() {
 		this.setState({
@@ -54,9 +47,7 @@ class MessageView extends React.Component{
 				message={item.fields.msg_content}
 				received={item.fields.sender == Orchestrator.AppData.targetId}
 			/>)}
-			<div style={{ float:"left", clear: "both" }}
-             	ref={(el) => { this.messagesEnd = el; }}>
-        	</div>
+			<ScrollHelper/>
 		</div>
 	}
 }
