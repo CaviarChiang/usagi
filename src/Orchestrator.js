@@ -2,7 +2,7 @@ import ApiUtil from './utils/ApiUtil.js';
 import AppData from './data/AppData.js';
 
 const testLastMessage = {
-    text: "This is a test message",
+    text: "This is a test message which is a bit long",
     timestamp: "2019-09-01T10:11:08",
 };
 const testId = 7956;
